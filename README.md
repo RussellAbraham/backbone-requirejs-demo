@@ -20,3 +20,32 @@ You need to have the following software installed:
 
 - [Node.js](https://nodejs.org/)
 - [Git](https://git-scm.com/)
+
+### Installing
+
+1. Clone the repository:
+
+    ```sh
+    git clone https://github.com/RussellAbraham/backbone-requirejs-demo.git
+    cd backbone-requirejs-demo
+    ```
+
+2. Initialize the project and install dependencies:
+
+    ```sh
+    npm install
+    ```
+
+3. Run the optimization script:
+
+    ```sh
+    npm run build
+    ```
+
+4. Open `index.html` in your browser to see the demo.
+
+## Built With
+
+- [Backbone.js](https://backbonejs.org/) - The JavaScript library used for building MV* applications
+- [RequireJS](https://requirejs.org/) - The JavaScript file and module loader
+- [r.js](https://requirejs.org/docs/optimization.html) - The optimizer used to compile the JavaScript files for production
