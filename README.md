@@ -30,7 +30,7 @@ You need to have the following software installed:
     cd backbone-requirejs-demo
     ```
 
-2. Initialize the project and install dependencies:
+2. To install node_modules - copies have been included in src/vendor/ to simplify the build:
 
     ```sh
     npm install

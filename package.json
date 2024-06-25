@@ -19,7 +19,7 @@
   "homepage": "https://github.com/RussellAbraham/backbone-requirejs-demo#readme",
   "dependencies": {
     "backbone": "^1.6.0",
-    "bootstrap": "^5.3.3",
+    "bootstrap": "^4.6.2",
     "jquery": "^3.7.1",
     "requirejs": "^2.3.6",
     "requirejs-text": "^2.0.16",
