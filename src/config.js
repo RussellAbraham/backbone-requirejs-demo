@@ -8,7 +8,20 @@ requirejs.config({
       'backbone': 'backbone/backbone',
       'text': 'requirejs-text/text',
       'bootstrap': 'bootstrap/js/bootstrap.bundle'
-  }
+  },
+  shim: {
+    'underscore': {
+        exports: '_'
+    },
+    'backbone': {
+        deps: ['underscore', 'jquery'],
+        exports: 'Backbone'
+    },
+    'bootstrap': {
+        deps: ['jquery'],
+        exports: 'Bootstrap'
+    }
+}
 });
 
 requirejs(['backbone','bootstrap','assets/js/routes/router'], function(Backbone, Bootstrap, Router) {
