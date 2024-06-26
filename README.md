@@ -65,49 +65,56 @@ You will have to define underscore as a dependency in all the modules you need t
 ```javascript
 define(['underscore'], function(_) {
     var tasks = [
-        { id: 1, title: 'Task 1', completed: false, priority: 'high' },
-        { id: 2, title: 'Task 2', completed: true, priority: 'low' },
-        { id: 3, title: 'Task 3', completed: false, priority: 'medium' },
-        { id: 4, title: 'Task 4', completed: true, priority: 'high' },
-        { id: 5, title: 'Task 5', completed: false, priority: 'low' }
+        { id: 1, title: 'Task 1', completed: false, priority: 'high', dueDate: '2024-06-25' },
+        { id: 2, title: 'Task 2', completed: true, priority: 'low', dueDate: '2024-06-20' },
+        { id: 3, title: 'Task 3', completed: false, priority: 'medium', dueDate: '2024-06-22' },
+        { id: 4, title: 'Task 4', completed: true, priority: 'high', dueDate: '2024-06-21' },
+        { id: 5, title: 'Task 5', completed: false, priority: 'low', dueDate: '2024-06-23' }
     ];
 
-    var incompleteTasks = _.where(tasks, { completed: false });
-    console.log('Incomplete Tasks:', incompleteTasks);
+    var defaultTask = { completed: false, priority: 'medium' };
 
-    var addUrgencyTag = function(task) {
-        task.urgent = task.priority === 'high';
-        return task;
-    };
+    var filterIncompleteTasks = _.partial(_.where, _, { completed: false });
+    var isTaskEqual = _.partial(_.isEqual, defaultTask);
+    var prioritizeTasks = _.compose(_.sortBy, _.property('dueDate'));
+    var capitalizeTitle = function(task) { return _.extend(task, { title: task.title.toUpperCase() }); };
+    
+    var memoizedCount = _.memoize(function(tasks) {
+        return _.size(tasks);
+    });
 
-    var toUpperCaseTitle = function(task) {
-        task.title = task.title.toUpperCase();
-        return task;
-    };
-
-    var transformTask = _.compose(addUrgencyTag, toUpperCaseTitle);
-
-    var transformedTasks = _.map(incompleteTasks, transformTask);
-    console.log('Transformed Tasks:', transformedTasks);
+    var result = _.chain(tasks)
+        .defaults(defaultTask)
+        .filter(filterIncompleteTasks)
+        .map(capitalizeTitle)
+        .sortBy('dueDate')
+        .groupBy('priority')
+        .mapObject(function(tasks, priority) {
+            return {
+                priority: priority,
+                tasks: tasks,
+                count: memoizedCount(tasks)
+            };
+        })
+        .pairs()
+        .sortBy(0)
+        .value();
 
     var taskTemplate = _.template(`
-        <h2>Incomplete Tasks</h2>
-        <ul>
-            <% _.each(tasks, function(task) { %>
-                <li>
-                    <%= task.title %> - Priority: <%= task.priority %>
-                    <% if (task.urgent) { %>
-                        <strong>(Urgent)</strong>
-                    <% } %>
-                </li>
-            <% }); %>
-        </ul>
+        <h2>Incomplete Tasks by Priority</h2>
+        <% _.each(result, function(group) { %>
+            <h3>Priority: <%= group[1].priority %> (<%= group[1].count %>)</h3>
+            <ul class="list-group">
+                <% _.each(group[1].tasks, function(task) { %>
+                    <li class="list-group-item">
+                        <%= task.title %> - Due: <%= task.dueDate %>
+                    </li>
+                <% }); %>
+            </ul>
+        <% }); %>
     `);
 
-    var renderedHtml = taskTemplate({ tasks: transformedTasks });
-    console.log('Rendered HTML:', renderedHtml);
-    
-    // Assuming you have a div with id 'task-list' in your HTML
+    var renderedHtml = taskTemplate({ result: result });
     document.getElementById('task-list').innerHTML = renderedHtml;
 });
 ```
