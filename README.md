@@ -10,6 +10,61 @@ This repository is intended to provide a starting point for developers intereste
 - An example of organizing code into models, views, routers, and main application files.
 - The use of r.js to compile and optimize JavaScript files for production.
 
+A note about `Underscore.js`. The version installed with npm will not be exposed to the global environment when included in `config.js`. 
+
+You will have to define underscore as a dependenct in all the modules you need to use the library in. This may have a better memory footprint. 
+
+```javascript
+define(['underscore'], function(_) {
+    var tasks = [
+        { id: 1, title: 'Task 1', completed: false, priority: 'high' },
+        { id: 2, title: 'Task 2', completed: true, priority: 'low' },
+        { id: 3, title: 'Task 3', completed: false, priority: 'medium' },
+        { id: 4, title: 'Task 4', completed: true, priority: 'high' },
+        { id: 5, title: 'Task 5', completed: false, priority: 'low' }
+    ];
+
+    var incompleteTasks = _.where(tasks, { completed: false });
+    console.log('Incomplete Tasks:', incompleteTasks);
+
+    var addUrgencyTag = function(task) {
+        task.urgent = task.priority === 'high';
+        return task;
+    };
+
+    var toUpperCaseTitle = function(task) {
+        task.title = task.title.toUpperCase();
+        return task;
+    };
+
+    var transformTask = _.compose(addUrgencyTag, toUpperCaseTitle);
+
+    var transformedTasks = _.map(incompleteTasks, transformTask);
+    console.log('Transformed Tasks:', transformedTasks);
+
+    var taskTemplate = _.template(`
+        <h2>Incomplete Tasks</h2>
+        <ul>
+            <% _.each(tasks, function(task) { %>
+                <li>
+                    <%= task.title %> - Priority: <%= task.priority %>
+                    <% if (task.urgent) { %>
+                        <strong>(Urgent)</strong>
+                    <% } %>
+                </li>
+            <% }); %>
+        </ul>
+    `);
+
+    var renderedHtml = taskTemplate({ tasks: transformedTasks });
+    console.log('Rendered HTML:', renderedHtml);
+    
+    // Assuming you have a div with id 'task-list' in your HTML
+    document.getElementById('task-list').innerHTML = renderedHtml;
+});
+```
+For ease, inside of src/vendor/underscore is a different version of underscore that will be scoped within the global environemt when add to the `congig.js` script. 
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
