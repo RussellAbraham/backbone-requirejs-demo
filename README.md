@@ -12,7 +12,7 @@ This repository is intended to provide a starting point for developers intereste
 
 A note about `Underscore.js`. The version installed with npm will not be exposed to the global environment when included in `config.js`. 
 
-You will have to define underscore as a dependenct in all the modules you need to use the library in. This may have a better memory footprint. 
+You will have to define underscore as a dependency in all the modules you need to use the library in. This may have a better memory footprint. 
 
 ```javascript
 define(['underscore'], function(_) {
