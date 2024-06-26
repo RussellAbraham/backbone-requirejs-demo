@@ -41,7 +41,7 @@ You need to have the following software installed:
     ```sh
     npm start
     ```
-A taskrunner is included to restart the server when changes are made, the browser will still need to be refreshed for changes to display.
+    A taskrunner is included to restart the server when changes are made, the browser will still need to be refreshed for changes to display.
 
     ```sh
     npm run dev
