@@ -1,2 +1,0 @@
-define(["backbone","assets/js/models/home","text!assets/html/home.html"],function(e,t,n){return e.View.extend({model:new t,template:_.template($(n).html()),initialize:function(){this.render()},render:function(){return this.$el.append(this.template(this.model.toJSON())),this}})});
-//# sourceMappingURL=home.js.map

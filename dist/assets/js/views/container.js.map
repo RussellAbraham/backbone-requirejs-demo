@@ -1,1 +1,0 @@
-{"version":3,"sources":["?"],"names":["define","Backbone","View","extend","child","render","view","this","$el","html"],"mappings":"AAAAA,QAAQ,YAAa,SAAUC,GAW7B,MATgBA,GAASC,KAAKC,QAC5BC,MAAO,KACPC,OAAQ,SAAUC,GAGhB,MAFAC,MAAKH,MAAQE,EACbC,KAAKC,IAAIC,KAAKF,KAAKH,MAAMI,KAClBD","file":"container.js"}

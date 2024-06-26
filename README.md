@@ -36,10 +36,15 @@ You need to have the following software installed:
     npm install
     ```
 
-3. Test any changes mad to the unbuilt application by running the development server
+3. Test any changes made to the unbuilt application by running the development server
 
     ```sh
     npm start
+    ```
+A taskrunner is included to restart the server when changes are made, the browser will still need to be refreshed for changes to display.
+
+    ```sh
+    npm run dev
     ```
 
 4. Run the optimization script:

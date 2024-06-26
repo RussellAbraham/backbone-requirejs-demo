@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "dev": "node bin/taskRunner.js",
     "build": "node_modules/.bin/r.js -o build.js"
   },
   "repository": {
