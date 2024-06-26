@@ -36,16 +36,28 @@ You need to have the following software installed:
     npm install
     ```
 
-3. Run the optimization script:
+3. Test any changes mad to the unbuilt application by running the development server
+
+    ```sh
+    npm start
+    ```
+
+4. Run the optimization script:
 
     ```sh
     npm run build
     ```
 
-4. Open `index.html` in your browser to see the demo.
+5. Open `index.html` in your browser to see the demo. After running build, a server should no longer be required to to load templates with `requirejs-text`
 
 ## Built With
 
 - [Backbone.js](https://backbonejs.org/) - The JavaScript library used for building MV* applications
 - [RequireJS](https://requirejs.org/) - The JavaScript file and module loader
 - [r.js](https://requirejs.org/docs/optimization.html) - The optimizer used to compile the JavaScript files for production
+
+### Todo
+
+- Add support for css modules that `r.js` can bundle together with the application
+- Setup task runner to restart the dev server when changes are made
+- Include an icon pack or api/mapping of html/css entities
