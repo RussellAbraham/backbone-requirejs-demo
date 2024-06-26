@@ -1,4 +1,4 @@
-define(['backbone', 'assets/js/views/container', 'assets/js/views/home'],function(Backbone, Container, HomeView){	
+define(['backbone', 'assets/js/views/container', 'assets/js/views/home', 'assets/js/views/about'],function(Backbone, Container, HomeView, AboutView){	
 	
 	var Router = Backbone.Router.extend({						
 		routes : { 
@@ -9,9 +9,13 @@ define(['backbone', 'assets/js/views/container', 'assets/js/views/home'],functio
 		initialize : function(){			
 			this.container = new Container({ el : $('#article') });	
 			this.homeView = new HomeView();
+			this.aboutView = new AboutView();
 		},
 		home : function(){
 			this.container.render(this.homeView);
+		},
+		about : function(){
+			this.container.render(this.aboutView);
 		}
   }); 
 	
