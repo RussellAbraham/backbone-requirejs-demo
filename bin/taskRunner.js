@@ -1,27 +1,3 @@
-/*const fs = require('fs');
-const { spawn } = require('child_process');
-
-let serverProcess;
-
-function startServer() {
-  if (serverProcess) {
-    serverProcess.kill();
-  }
-  serverProcess = spawn('node', ['./server.js'], { stdio: 'inherit' });
-}
-
-function watchFiles(dir) {
-  fs.watch(dir, { recursive: true }, (eventType, filename) => {
-    if (filename) {
-      console.log(`File changed: ${filename}`);
-      startServer();
-    }
-  });
-}
-
-startServer();
-watchFiles('src');
-*/
 const fs = require('fs');
 const { spawn } = require('child_process');
 const path = require('path');
@@ -32,7 +8,7 @@ function startServer() {
   if (serverProcess) {
     serverProcess.kill();
   }
-  serverProcess = spawn('node', ['server.js'], { stdio: 'inherit' });
+  serverProcess = spawn('node', ['./bin/server.js'], { stdio: 'inherit' });
 }
 
 function watchFiles(dir) {

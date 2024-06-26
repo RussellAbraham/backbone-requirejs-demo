@@ -4,9 +4,9 @@
   "description": "This project serves as a template and demonstration of using Backbone.js with RequireJS to build a modular and maintainable JavaScript application. It includes a basic setup with a single router and a view, showcasing the capabilities of these libraries in structuring a web application. Additionally, it demonstrates the use of r.js for optimizing and compiling JavaScript files for production.",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node bin/server.js",
     "dev": "node bin/taskRunner.js",
-    "build": "node_modules/.bin/r.js -o build.js"
+    "build": "node_modules/.bin/r.js -o bin/build.js"
   },
   "repository": {
     "type": "git",
