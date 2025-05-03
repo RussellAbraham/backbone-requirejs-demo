@@ -1,5 +1,5 @@
 define(['backbone'],function(Backbone){
-	var contactModel = Backbone.Model.extend({
+	var ContactModel = Backbone.Model.extend({
 		defaults : {			
 			email : '',      
 			phone : '',      
