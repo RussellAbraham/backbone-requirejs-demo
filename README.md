@@ -68,59 +68,9 @@ A note about `Underscore.js`. The version installed with npm will not be exposed
 You will have to define underscore as a dependency in all the modules you need to use the library in. This may have a better memory footprint. 
 
 ```javascript
+/* any module to use the latest underscore version must have underscore defined */
 define(['underscore'], function(_) {
-    var tasks = [
-        { id: 1, title: 'Task 1', completed: false, priority: 'high', dueDate: '2024-06-25' },
-        { id: 2, title: 'Task 2', completed: true, priority: 'low', dueDate: '2024-06-20' },
-        { id: 3, title: 'Task 3', completed: false, priority: 'medium', dueDate: '2024-06-22' },
-        { id: 4, title: 'Task 4', completed: true, priority: 'high', dueDate: '2024-06-21' },
-        { id: 5, title: 'Task 5', completed: false, priority: 'low', dueDate: '2024-06-23' }
-    ];
-
-    var defaultTask = { completed: false, priority: 'medium' };
-
-    var filterIncompleteTasks = _.partial(_.where, _, { completed: false });
-    var isTaskEqual = _.partial(_.isEqual, defaultTask);
-    var prioritizeTasks = _.compose(_.sortBy, _.property('dueDate'));
-    var capitalizeTitle = function(task) { return _.extend(task, { title: task.title.toUpperCase() }); };
-    
-    var memoizedCount = _.memoize(function(tasks) {
-        return _.size(tasks);
-    });
-
-    var result = _.chain(tasks)
-        .defaults(defaultTask)
-        .filter(filterIncompleteTasks)
-        .map(capitalizeTitle)
-        .sortBy('dueDate')
-        .groupBy('priority')
-        .mapObject(function(tasks, priority) {
-            return {
-                priority: priority,
-                tasks: tasks,
-                count: memoizedCount(tasks)
-            };
-        })
-        .pairs()
-        .sortBy(0)
-        .value();
-
-    var taskTemplate = _.template(`
-        <h2>Incomplete Tasks by Priority</h2>
-        <% _.each(result, function(group) { %>
-            <h3>Priority: <%= group[1].priority %> (<%= group[1].count %>)</h3>
-            <ul class="list-group">
-                <% _.each(group[1].tasks, function(task) { %>
-                    <li class="list-group-item">
-                        <%= task.title %> - Due: <%= task.dueDate %>
-                    </li>
-                <% }); %>
-            </ul>
-        <% }); %>
-    `);
-
-    var renderedHtml = taskTemplate({ result: result });
-    document.getElementById('task-list').innerHTML = renderedHtml;
+    console.log(`Underscore Version : ${_.VERSION}`);
 });
 ```
 For ease, inside of src/vendor/underscore is a different version of underscore that will be scoped within the global environemt when add to the `congig.js` script. 
